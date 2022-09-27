@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package br.senac.telas;
+import java.sql.*;
+import br.senac.conexaoBD.conexao;
+
+
 
 /**
  *
@@ -11,11 +15,27 @@ package br.senac.telas;
  */
 public class frm_Login extends javax.swing.JFrame {
 
+    Connection Conexao = null;
+    PreparedStatement ps = null; // Prepara a Consulta para 
+    ResultSet rs = null;
+    
+    
+    
     /**
      * Creates new form frm_Login
      */
     public frm_Login() {
         initComponents();
+        Conexao = conexao.Conector();
+        
+        if (Conexao!=null) {
+        lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senac/icones/dbConectado.png")));
+        } else {
+       lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senac/icones/dbErro.png")));
+        }
+        
+        
+        
     }
 
     /**
@@ -34,6 +54,7 @@ public class frm_Login extends javax.swing.JFrame {
         txtusuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtsenha = new javax.swing.JPasswordField();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -57,6 +78,8 @@ public class frm_Login extends javax.swing.JFrame {
 
         jLabel1.setText("Usuário:");
 
+        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -68,16 +91,17 @@ public class frm_Login extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnlogin, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtsenha)
-                                .addComponent(txtusuario, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                            .addComponent(txtsenha)
+                            .addComponent(txtusuario))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +117,9 @@ public class frm_Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(btnlogin)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnlogin)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
 
@@ -159,6 +185,7 @@ public class frm_Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JPasswordField txtsenha;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables

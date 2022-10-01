@@ -100,6 +100,79 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
 
 }
     
+    
+       private void alterarDados() {
+         
+           String sql = "update usuarios set nome_usuario=?, telefone=?, login=?, senha=? where id_usuario =? ";
+         try {
+             ps = Conexao.prepareStatement(sql);
+             ps.setString(1, txtnome.getText());
+             ps.setString(2, txtfone.getText());
+             ps.setString(3, txtlogin.getText());
+             ps.setString(4, txtsenha.getText());
+             ps.setString(5, txt_id.getText());
+             
+             int adicionado = ps.executeUpdate();
+             
+             if (adicionado>0) {
+              JOptionPane.showMessageDialog(null, "Dados Alterados");
+                    txt_id.setText(null);
+                    txtnome.setText(null);
+                    txtfone.setText(null);
+                    txtlogin.setText(null);
+                    txtsenha.setText(null);
+              
+             }
+             
+             
+         } catch (Exception e) {
+              JOptionPane.showMessageDialog(null, e);
+         }
+       
+       
+       }
+       
+       
+        private void remover() {
+       
+            int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza?", "Atenção", JOptionPane.YES_NO_OPTION);
+            
+            
+            
+            if (confirma==JOptionPane.YES_OPTION) {
+            
+            String sql = " delete from usuarios where id_usuario=?";
+            
+            
+            try {
+                
+                ps = Conexao.prepareStatement(sql);
+                ps.setString(1, txt_id.getText());
+                
+                int apagado = ps.executeUpdate();
+                
+                
+                if (apagado>0) {
+                 JOptionPane.showMessageDialog(null, "Usuario Apagado");
+                    txt_id.setText(null);
+                    txtnome.setText(null);
+                    txtfone.setText(null);
+                    txtlogin.setText(null);
+                    txtsenha.setText(null);
+                }
+                
+                
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        
+            }
+        }
+       
+       
+       
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,8 +263,18 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
         });
 
         btnremover.setText("Remover");
+        btnremover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnremoverActionPerformed(evt);
+            }
+        });
 
         btnalterar.setText("Alterar");
+        btnalterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnalterarActionPerformed(evt);
+            }
+        });
 
         try {
             txtfone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#.####-####")));
@@ -323,6 +406,20 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
         carregaDadosJaCadastrados();
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnalterarActionPerformed
+        // TODO add your handling code here:
+        
+        alterarDados();
+        
+    }//GEN-LAST:event_btnalterarActionPerformed
+
+    private void btnremoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnremoverActionPerformed
+        // TODO add your handling code here:
+        
+        remover();
+        
+    }//GEN-LAST:event_btnremoverActionPerformed
 
     /**
      * @param args the command line arguments

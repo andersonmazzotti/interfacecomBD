@@ -6,8 +6,10 @@
 package br.senac.telas;
 
 import br.senac.conexaoBD.conexao;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 
@@ -46,10 +48,7 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
                 int adicionado = ps.executeUpdate();
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Usuario add com sucesso!");    
-                    txtnome.setText(null);
-                    txtfone.setText(null);
-                    txtlogin.setText(null);
-                    txtsenha.setText(null);
+                    limpar();
                 }
             }
 
@@ -116,11 +115,7 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
              
              if (adicionado>0) {
               JOptionPane.showMessageDialog(null, "Dados Alterados");
-                    txt_id.setText(null);
-                    txtnome.setText(null);
-                    txtfone.setText(null);
-                    txtlogin.setText(null);
-                    txtsenha.setText(null);
+                    limpar();
               
              }
              
@@ -154,11 +149,7 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
                 
                 if (apagado>0) {
                  JOptionPane.showMessageDialog(null, "Usuario Apagado");
-                    txt_id.setText(null);
-                    txtnome.setText(null);
-                    txtfone.setText(null);
-                    txtlogin.setText(null);
-                    txtsenha.setText(null);
+                    limpar();
                 }
                 
                 
@@ -172,6 +163,18 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
        
        
        
+        
+        
+        private void limpar(){
+                    txt_id.setText(null);
+                    txtnome.setText(null);
+                    txtfone.setText(null);
+                    txtlogin.setText(null);
+                    txtsenha.setText(null);
+                    txtbuscar.setText(null);
+                    ((DefaultTableModel) tb_lista.getModel()).setRowCount(0);
+        
+        }
     
     /**
      * This method is called from within the constructor to initialize the form.

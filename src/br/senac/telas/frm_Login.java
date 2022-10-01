@@ -6,6 +6,7 @@
 package br.senac.telas;
 import java.sql.*;
 import br.senac.conexaoBD.conexao;
+import javax.swing.JOptionPane;
 
 
 
@@ -13,6 +14,10 @@ import br.senac.conexaoBD.conexao;
  *
  * @author anderson.mazzotti
  */
+
+
+
+
 public class frm_Login extends javax.swing.JFrame {
 
     Connection Conexao = null;
@@ -33,10 +38,34 @@ public class frm_Login extends javax.swing.JFrame {
         } else {
        lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senac/icones/dbErro.png")));
         }
-        
-        
+         
         
     }
+    
+    public void login(){
+        String sql = "select * from usuarios where login=? and senha=?";
+        try {
+           ps = Conexao.prepareStatement(sql);
+           ps.setString(1, txtusuario.getText());
+           ps.setString(2, txtsenha.getText());
+           
+           rs = ps.executeQuery();
+           
+           if (rs.next()) {
+                    //carregar tela principal
+                   frm_Principal principal = new frm_Principal();
+                   principal.setVisible(true);
+                   this.dispose();
+                   Conexao.close();
+                    
+                } else {
+               JOptionPane.showMessageDialog(null, "Usuario ou senha incorreta!");
+           }
+           
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,13 +99,30 @@ public class frm_Login extends javax.swing.JFrame {
                 btnloginActionPerformed(evt);
             }
         });
+        btnlogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnloginKeyPressed(evt);
+            }
+        });
 
         jLabel2.setText("Senha:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senac/icones/logo.png"))); // NOI18N
 
+        txtusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtusuarioKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("Usuário:");
+
+        txtsenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtsenhaKeyPressed(evt);
+            }
+        });
 
         lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -142,7 +188,36 @@ public class frm_Login extends javax.swing.JFrame {
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         // TODO add your handling code here:
+        
+        
+        login();
+        
     }//GEN-LAST:event_btnloginActionPerformed
+
+    private void btnloginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnloginKeyPressed
+        // TODO add your handling code here:
+        
+       
+    }//GEN-LAST:event_btnloginKeyPressed
+
+    private void txtusuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyPressed
+
+ if (evt.getKeyCode()==10) {
+        txtsenha.requestFocus();
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioKeyPressed
+
+    private void txtsenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsenhaKeyPressed
+        // TODO add your handling code here:
+        
+        
+         if (evt.getKeyCode()==10) {
+        login();
+        }
+         
+    }//GEN-LAST:event_txtsenhaKeyPressed
 
     /**
      * @param args the command line arguments

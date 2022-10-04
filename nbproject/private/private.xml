@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/anderson.mazzotti/Documents/NetBeansProjects/InterfaceGraficaComBD/src/br/senac/conexaoBD/conexao.java</file>
+            <file>file:/C:/Users/anderson.mazzotti/Documents/NetBeansProjects/InterfaceGraficaComBD/src/br/senac/telas/frm_Login.java</file>
+            <file>file:/C:/Users/anderson.mazzotti/Documents/NetBeansProjects/InterfaceGraficaComBD/src/br/senac/telas/frm_cadastro_usuario.java</file>
+            <file>file:/C:/Users/anderson.mazzotti/Documents/NetBeansProjects/InterfaceGraficaComBD/src/br/senac/telas/frm_Principal.java</file>
+        </group>
     </open-files>
 </project-private>

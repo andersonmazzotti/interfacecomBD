@@ -235,6 +235,12 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
 
         jLabel6.setText("Pesquisar:");
 
+        tb_lista = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+
+        };
         tb_lista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -251,6 +257,8 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_lista.setFocusable(false);
+        tb_lista.getTableHeader().setReorderingAllowed(false);
         tb_lista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tb_listaMouseClicked(evt);
@@ -273,6 +281,11 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
         });
 
         btnalterar.setText("Alterar");
+        btnalterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnalterarMouseClicked(evt);
+            }
+        });
         btnalterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnalterarActionPerformed(evt);
@@ -423,6 +436,13 @@ public class frm_cadastro_usuario extends javax.swing.JFrame {
         remover();
         
     }//GEN-LAST:event_btnremoverActionPerformed
+
+    private void btnalterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnalterarMouseClicked
+        // TODO add your handling code here:
+        
+        btninserir.setEnabled(false);
+        
+    }//GEN-LAST:event_btnalterarMouseClicked
 
     /**
      * @param args the command line arguments

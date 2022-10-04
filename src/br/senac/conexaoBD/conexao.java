@@ -16,9 +16,9 @@ public class conexao {
     public static Connection Conector(){
         Connection Conexao = null;
         String driver="com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/senac";
-        String user = "root";
-        String password = "123qwe@";
+        String url = "jdbc:mysql://localhost:3306/senac?characterEncoding=utf-8";
+        String user = "admin";
+        String password = "admin";
         
        
         try {
